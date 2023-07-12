@@ -4,16 +4,49 @@ using UnityEngine;
 
 public class Pausa : MonoBehaviour
 {
-	public GameObject panel;
+	public GameObject panelPausa;
+    public GameObject panelInterface;
 
-	public void Pausar()
+    public Animator ani;
+
+    [Space]
+    public GameObject componente;
+    public UI ui;
+
+    private void Start()
+    {
+        componente = GameObject.Find("--------------UI");
+        ui = componente.GetComponent<UI>();
+    }
+
+    public void Pausar()
 	{
-		panel.SetActive(true);
-		Time.timeScale = 0;
+		panelPausa.SetActive(true);
+        panelInterface.SetActive(false);
+        Time.timeScale = 0;
 	}
 	public void Reanudar()
 	{
-		panel.SetActive(false);
-		Time.timeScale = 1;
-	}
+        StartCoroutine(AnimacionReanudar());
+    }
+    public void Reiniciar()
+    {
+        ui.Gameplay();
+    }
+    public void Menu()
+    {
+        ui.Menu();
+    }
+
+
+
+    private IEnumerator AnimacionReanudar()
+    {
+        panelPausa.SetActive(false);
+        panelInterface.SetActive(true);
+        ani.SetBool("Activar", true);
+        yield return new WaitForSeconds(3);
+        ani.SetBool("Activar", false);
+        Time.timeScale = 1;       
+    }
 }

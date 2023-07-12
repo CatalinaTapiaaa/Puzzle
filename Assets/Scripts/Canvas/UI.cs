@@ -31,12 +31,6 @@ public class UI : MonoBehaviour
 		Time.timeScale = 1;
 		scena = 1;
 	}
-	public void Introduccion()
-	{
-		StartCoroutine(Animacion());
-		Time.timeScale = 1;
-		scena = 2;
-	}
 	public void Gameplay()
 	{
 		StartCoroutine(Animacion());
